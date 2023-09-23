@@ -5,9 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
-import com.lzcalderaro.awsary.R
 import com.lzcalderaro.awsary.databinding.ArchiveFragmentBinding
+import com.lzcalderaro.awsary.viewModels.AwsServicesViewModel
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -20,14 +20,14 @@ class Archive : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private val awsList by activityViewModel<AwsServicesViewModel>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-
+    ): View {
         _binding = ArchiveFragmentBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

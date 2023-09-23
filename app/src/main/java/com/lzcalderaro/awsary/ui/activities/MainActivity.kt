@@ -11,11 +11,16 @@ import android.view.Menu
 import android.view.MenuItem
 import com.lzcalderaro.awsary.R
 import com.lzcalderaro.awsary.databinding.ActivityMainBinding
+import com.lzcalderaro.awsary.viewModels.AwsServicesViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+
+    private val awsList by viewModel<AwsServicesViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
