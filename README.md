@@ -1,4 +1,4 @@
-# AWSary is a AWS Dictionary iOS App
+# AWSary is a AWS Dictionary Android App
 
 
 ![AWSary Logo](https://raw.githubusercontent.com/tigpt/AWSary/main/ios/logo/icon-logo_152_color.png)
