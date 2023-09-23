@@ -48,4 +48,12 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     implementation "io.insert-koin:koin-android:3.4.2"
+
+    def ktor_version = "2.3.3"
+    implementation "io.ktor:ktor-client-core:$ktor_version"
+    implementation "io.ktor:ktor-client-android:$ktor_version"
+    implementation "io.ktor:ktor-client-content-negotiation:$ktor_version"
+    implementation "io.ktor:ktor-serialization-kotlinx-json:$ktor_version"
+
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.2"
 }
