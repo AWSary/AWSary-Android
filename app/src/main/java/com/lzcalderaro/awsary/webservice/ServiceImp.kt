@@ -2,7 +2,7 @@ package com.lzcalderaro.awsary.webservice
 
 import android.util.Log
 import com.lzcalderaro.awsary.webservice.Routes.BASE_URL
-import com.lzcalderaro.awsary.webservice.dto.AwsList
+import com.lzcalderaro.awsary.webservice.dto.AwsItem
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.ClientRequestException
@@ -12,23 +12,23 @@ import io.ktor.client.request.get
 
 class ServiceImp(private val client:HttpClient): Service {
 
-    override suspend fun getList(): AwsList? {
+    override suspend fun getList(): List<AwsItem>? {
         return try {
-            client.get(BASE_URL).body<AwsList>()
+            client.get(BASE_URL).body<List<AwsItem>>()
         } catch(e: RedirectResponseException) {
             // 3xx - responses
-            Log.d("AWSary","Error: ${e.response.status.description}")
+            Log.d("AWSARYDEBUG","Error: ${e.response.status.description}")
             null
         } catch(e: ClientRequestException) {
             // 4xx - responses
-            Log.d("AWSary","Error: ${e.response.status.description}")
+            Log.d("AWSARYDEBUG","Error: ${e.response.status.description}")
             null
         } catch(e: ServerResponseException) {
             // 5xx - responses
-            Log.d("AWSary","Error: ${e.response.status.description}")
+            Log.d("AWSARYDEBUG","Error: ${e.response.status.description}")
             null
         } catch(e: Exception) {
-            Log.d("AWSary","Error: ${e.message}")
+            Log.d("AWSARYDEBUG","Error: ${e.message}")
             null
         }
     }

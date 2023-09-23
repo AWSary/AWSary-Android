@@ -5,8 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.GridView
 import com.lzcalderaro.awsary.databinding.ArchiveFragmentBinding
+import com.lzcalderaro.awsary.ui.adapters.AwsServicesAdapter
 import com.lzcalderaro.awsary.viewModels.AwsServicesViewModel
+import com.lzcalderaro.awsary.webservice.dto.AwsItem
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 /**
@@ -33,6 +36,18 @@ class Archive : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        awsList.getAwsServices().observe(viewLifecycleOwner) { awsServices ->
+
+            if (awsServices != null) {
+                populateGrid(awsServices)
+            }
+        }
+    }
+
+    private fun populateGrid(list: List<AwsItem>) {
+        val grid: GridView = binding.servicesList
+        val adapter = AwsServicesAdapter(list, requireContext())
+        grid.adapter = adapter
     }
 
     override fun onDestroyView() {
