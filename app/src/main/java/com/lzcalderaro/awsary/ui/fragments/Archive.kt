@@ -1,5 +1,6 @@
 package com.lzcalderaro.awsary.ui.fragments
 
+import android.content.ClipData
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -75,6 +76,18 @@ class Archive : Fragment() {
         myView.setOnItemClickListener { _, _, position, _ ->
             awsViewModel.selectedItem = adapter.awsFilterableList?.get(position)
             findNavController().navigate(R.id.action_ArchiveFragment_to_SingleFragment)
+        }
+
+        myView.setOnItemLongClickListener { _, view, position, _ ->
+
+            val awsItem =  adapter.awsFilterableList?.get(position)?.imageURL
+
+            val dragData = ClipData.newPlainText("image_path", awsItem)
+            val dragShadowBuilder = View.DragShadowBuilder(view)
+
+            // Start the drag operation
+            view.startDragAndDrop(dragData, dragShadowBuilder, null, View.DRAG_FLAG_GLOBAL)
+            true
         }
     }
 
