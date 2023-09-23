@@ -2,13 +2,14 @@ package com.lzcalderaro.awsary.ui.fragments
 
 import android.content.ClipData
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.GridView
 import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.lzcalderaro.awsary.R
 import com.lzcalderaro.awsary.databinding.ArchiveFragmentBinding
@@ -17,6 +18,7 @@ import com.lzcalderaro.awsary.utils.LocalResources
 import com.lzcalderaro.awsary.viewModels.AwsServicesViewModel
 import com.lzcalderaro.awsary.webservice.dto.AwsItem
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
+
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
