@@ -6,4 +6,5 @@
     <string name="single_label">Single</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="search">Search</string>
 </resources>

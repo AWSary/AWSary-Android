@@ -33,9 +33,9 @@ class Single : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonSecond.setOnClickListener {
+/*        binding.buttonSecond.setOnClickListener {
             findNavController().navigate(R.id.action_SingleFragment_to_ArchiveFragment)
-        }
+        }*/
     }
 
     override fun onDestroyView() {
