@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class AwsItem(
-    val shortDescription: String,
+    @SerialName("shortDesctiption") val shortDescription: String,
     val imageURL: String,
     val longName: String,
     @SerialName("youtube_id") val youtubeId: String,

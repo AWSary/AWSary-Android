@@ -9,13 +9,11 @@ import com.lzcalderaro.awsary.webservice.dto.AwsItem
 
 class AwsServicesViewModel(private val awsServicesRepository: AwsServicesRepository): ViewModel() {
 
+    var awsList: List<AwsItem>? = null
+    var selectedItem: AwsItem? = null
+
     fun getAwsServices(): LiveData<List<AwsItem>?> = liveData {
         val data = awsServicesRepository.loadList().value
-
-        Log.d("AWSARYDEBUG", data.toString())
-
-        if (data != null) {
-            emit(data)
-        }
+        emit(data)
     }
 }

@@ -2,9 +2,9 @@
     <string name="app_name">AWSary</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="archive_label">Archive</string>
-    <string name="single_label">Single</string>
+    <string name="archive_label">AWSary</string>
+    <string name="single_label">AWSary</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-    <string name="search">Search</string>
+    <string name="search">Search for an AWS Service</string>
 </resources>
