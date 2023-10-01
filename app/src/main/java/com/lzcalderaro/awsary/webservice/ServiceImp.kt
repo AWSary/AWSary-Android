@@ -5,6 +5,7 @@ import android.util.Log
 import com.lzcalderaro.awsary.webservice.Routes.BASE_URL
 import com.lzcalderaro.awsary.webservice.dto.AwsItem
 import io.ktor.client.HttpClient
+import io.ktor.client.call.NoTransformationFoundException
 import io.ktor.client.call.body
 import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.plugins.RedirectResponseException
@@ -28,6 +29,15 @@ class ServiceImp(private val client:HttpClient): Service {
             // 5xx - responses
             Log.d("AWSARYDEBUG","Error: ${e.response.status.description}")
             null
+        } catch (e: NoTransformationFoundException) {
+
+            val request: String = client.get(BASE_URL).body()
+            val json = kotlinx.serialization.json.Json {
+                ignoreUnknownKeys = true
+            }
+
+            json.decodeFromString(request)
+
         } catch(e: Exception) {
             Log.d("AWSARYDEBUG","Error: ${e.message}")
             null

@@ -1,5 +1,6 @@
 package com.lzcalderaro.awsary.ui.fragments
 
+import android.content.ClipData
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -47,6 +48,16 @@ class Single : Fragment() {
     private fun loadView() {
         Glide.with(requireContext()).load(awsViewModel.selectedItem?.imageURL).into(binding.headerImage)
         binding.headerTitle.text = awsViewModel.selectedItem?.longName
+
+        binding.imageCard.setOnLongClickListener {
+
+            val dragData = ClipData.newPlainText("image_path", awsViewModel.selectedItem?.imageURL)
+            val dragShadowBuilder = View.DragShadowBuilder(it)
+
+            // Start the drag operation
+            it.startDragAndDrop(dragData, dragShadowBuilder, null, View.DRAG_FLAG_GLOBAL)
+            true
+        }
 
         val markdown = Markwon.create(requireContext())
         markdown.setMarkdown(binding.contentText, awsViewModel.selectedItem?.shortDescription.toString())

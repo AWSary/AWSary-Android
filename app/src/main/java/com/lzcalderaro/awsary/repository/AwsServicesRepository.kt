@@ -15,11 +15,6 @@ class AwsServicesRepository {
 
     suspend fun loadList(): LiveData<List<AwsItem>?> {
         return try {
-
-            val getList = client.getList()
-
-            Log.d("AWSARYDEBUG", getList.toString())
-
             awsList.value = client.getList()
             awsList
         } catch (e:Exception) {

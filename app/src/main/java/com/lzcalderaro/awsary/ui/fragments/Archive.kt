@@ -49,8 +49,6 @@ class Archive : Fragment() {
             if (awsServices != null) {
                 populateGrid(awsServices)
             } else {
-                Log.d("AWSARYDEBUG", "VIM DO OFFLINE?")
-
                 awsViewModel.awsList = LocalResources(requireContext()).load()
                 populateGrid(awsViewModel.awsList!!)
             }
