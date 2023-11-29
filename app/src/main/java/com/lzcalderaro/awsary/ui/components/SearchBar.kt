@@ -3,6 +3,8 @@ package com.lzcalderaro.awsary.ui.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -26,6 +28,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -33,15 +36,8 @@ fun SearchBar(
     searchDisplay: String,
     onSearchDisplayChanged: (String) -> Unit,
     modifier: Modifier = Modifier,
-    tint: Color = Color.White,
 ) {
     val focusManager = LocalFocusManager.current
-
-/*    val textFieldFocusRequester = remember { FocusRequester() }
-
-    SideEffect {
-        textFieldFocusRequester.requestFocus()
-    }*/
 
     var textFieldValue by remember {
         mutableStateOf(TextFieldValue(searchDisplay, TextRange(searchDisplay.length)))
@@ -61,10 +57,12 @@ fun SearchBar(
             trailingIcon = {
                 SearchIcon()
             },
+            shape = RoundedCornerShape(percent = 10),
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .padding(10.dp),
             label = {
-                Text(text = "Search", color = tint)
+                Text(text = "Search")
             },
             keyboardOptions = KeyboardOptions(
                 imeAction = ImeAction.Done
