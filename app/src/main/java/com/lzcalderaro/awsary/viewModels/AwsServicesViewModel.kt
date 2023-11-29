@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lzcalderaro.awsary.repository.AwsServicesRepository
 import com.lzcalderaro.awsary.webservice.dto.AwsItem
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 
 class AwsServicesViewModel(private val awsServicesRepository: AwsServicesRepository): ViewModel() {
@@ -20,11 +20,14 @@ class AwsServicesViewModel(private val awsServicesRepository: AwsServicesReposit
     val filteredList: LiveData<List<AwsItem>?> = _filteredList
 
     fun getAwsServices() {
-        viewModelScope.launch(Dispatchers.Main) {
-            val data = awsServicesRepository.loadList().value
-            _filteredList.value = data
-            _completedList.value = data
+        viewModelScope.launch(IO) {
+            awsServicesRepository.loadListFromFirebase(::loadData)
         }
+    }
+
+    private fun loadData(list: List<AwsItem>?) {
+        _filteredList.postValue(list)
+        _completedList.postValue(list)
     }
 
     fun onSearch(value: String) {
