@@ -65,7 +65,7 @@ class Archive : Fragment() {
                     Loader()
                 } else {
                     SearchBar(searchDisplay = "", onSearchDisplayChanged = awsViewModel::onSearch)
-                    itemGrid(awsList)
+                    awsList?.let { itemGrid(it) }
                 }
             }
         }
@@ -82,7 +82,7 @@ class Archive : Fragment() {
     }
 
     @Composable
-    private fun itemGrid(awsList: List<AwsItem>?) {
+    private fun itemGrid(awsList: List<AwsItem>) {
 
         val listState = rememberLazyGridState()
 
@@ -90,10 +90,8 @@ class Archive : Fragment() {
             columns = GridCells.Adaptive(100.dp),
             state = listState
         ) {
-            awsList?.let { awsItem ->
-                items(awsItem.size) {
-                    AwsIcon(awsItem[it], ::goToSingle)
-                }
+            items(awsList.size) { index ->
+                AwsIcon(awsList[index], ::goToSingle)
             }
         }
     }
