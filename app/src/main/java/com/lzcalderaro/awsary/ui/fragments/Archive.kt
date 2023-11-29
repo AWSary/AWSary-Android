@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,6 +30,7 @@ import com.lzcalderaro.awsary.viewModels.AwsServicesViewModel
 import com.lzcalderaro.awsary.webservice.dto.AwsItem
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 
 class Archive : Fragment() {
 
@@ -71,8 +74,12 @@ class Archive : Fragment() {
 
     @Composable
     fun Loader() {
-        // Show loading indicator or placeholder
-        Text(text = "Loading...")
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier.fillMaxSize()
+        ) {
+            CircularProgressIndicator()
+        }
     }
 
     @Composable

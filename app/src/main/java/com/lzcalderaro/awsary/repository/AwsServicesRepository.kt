@@ -1,6 +1,5 @@
 package com.lzcalderaro.awsary.repository
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.database.DataSnapshot
@@ -36,18 +35,17 @@ class AwsServicesRepository {
                 if (dataSnapshot.exists()) {
                     val servicesList: MutableList<AwsItem> = mutableListOf()
 
-                    dataSnapshot.children.forEach {
+                    dataSnapshot.children.forEach { snapshot ->
 
-                        val item = it.getValue<AwsItem>()
+                        val item = snapshot.getValue<AwsItem>()
 
-                        item.let { serializedObject ->
+                        item.let { awsItem ->
 
-                            if (serializedObject == null) {
-                                Log.d("QUEROVERRRR", "NULO")
+                            if (awsItem == null) {
                                 return@let
                             }
 
-                            servicesList.add(serializedObject)
+                            servicesList.add(awsItem)
                         }
                     }
                     callback(servicesList)

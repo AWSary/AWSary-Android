@@ -11,7 +11,6 @@ import kotlinx.coroutines.launch
 
 class AwsServicesViewModel(private val awsServicesRepository: AwsServicesRepository): ViewModel() {
 
-    //var awsList: List<AwsItem>? = null
     var selectedItem: AwsItem? = null
 
     private val _filteredList = MutableLiveData<List<AwsItem>?>()
