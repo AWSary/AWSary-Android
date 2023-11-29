@@ -1,35 +1,35 @@
 package com.lzcalderaro.awsary.ui.fragments
 
-import android.content.ClipData
 import android.os.Bundle
-import android.util.DisplayMetrics
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.GridView
-import androidx.appcompat.widget.SearchView
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.lzcalderaro.awsary.R
-import com.lzcalderaro.awsary.databinding.ArchiveFragmentBinding
-import com.lzcalderaro.awsary.ui.adapters.AwsServicesAdapter
-import com.lzcalderaro.awsary.utils.LocalResources
+import com.lzcalderaro.awsary.ui.components.AwsIcon
+import com.lzcalderaro.awsary.ui.components.SearchBar
+import com.lzcalderaro.awsary.ui.screen.ScaffoldScreen
 import com.lzcalderaro.awsary.viewModels.AwsServicesViewModel
 import com.lzcalderaro.awsary.webservice.dto.AwsItem
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
+import androidx.compose.runtime.getValue
 
-
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
 class Archive : Fragment() {
-
-    private var _binding: ArchiveFragmentBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
 
     private val awsViewModel by activityViewModel<AwsServicesViewModel>()
 
@@ -37,72 +37,63 @@ class Archive : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = ArchiveFragmentBinding.inflate(inflater, container, false)
-        return binding.root
+       return ComposeView(requireActivity()).apply {
+           setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+           setContent {
+               ScaffoldScreen {
+                   ArchiveScreen()
+               }
+           }
+       }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    @Composable
+    fun ArchiveScreen() {
 
-        awsViewModel.getAwsServices().observe(viewLifecycleOwner) { awsServices ->
+        val awsList by awsViewModel.filteredList.observeAsState(emptyList())
 
-            if (awsServices != null) {
-                populateGrid(awsServices)
-            } else {
-                awsViewModel.awsList = LocalResources(requireContext()).load()
-                populateGrid(awsViewModel.awsList!!)
+        LaunchedEffect(Unit) {
+            awsViewModel.getAwsServices()
+        }
+
+        Surface (modifier = Modifier.fillMaxSize())
+        {
+            Column {
+                if (awsList?.isEmpty() == true) {
+                    Loader()
+                } else {
+                    SearchBar(searchDisplay = "", onSearchDisplayChanged = awsViewModel::onSearch)
+                    itemGrid(awsList)
+                }
             }
         }
     }
 
-    private fun bindButtons(myView: GridView, adapter: AwsServicesAdapter) {
-        binding.search.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(p0: String?): Boolean {
-                return false
+    @Composable
+    fun Loader() {
+        // Show loading indicator or placeholder
+        Text(text = "Loading...")
+    }
+
+    @Composable
+    private fun itemGrid(awsList: List<AwsItem>?) {
+
+        val listState = rememberLazyGridState()
+
+        LazyVerticalGrid(
+            columns = GridCells.Adaptive(100.dp),
+            state = listState
+        ) {
+            awsList?.let { awsItem ->
+                items(awsItem.size) {
+                    AwsIcon(awsItem[it], ::goToSingle)
+                }
             }
-
-            override fun onQueryTextChange(p0: String?): Boolean {
-                adapter.filter.filter(p0)
-                return false
-            }
-
-        })
-
-        binding.search.setOnQueryTextFocusChangeListener { _, hasFocus ->
-            binding.search.isSelected = hasFocus
-            binding.search.isIconified = !hasFocus
-        }
-
-        myView.setOnItemClickListener { _, _, position, _ ->
-            awsViewModel.selectedItem = adapter.awsFilterableList?.get(position)
-            findNavController().navigate(R.id.action_ArchiveFragment_to_SingleFragment)
-        }
-
-        myView.setOnItemLongClickListener { _, view, position, _ ->
-
-            val awsItem =  adapter.awsFilterableList?.get(position)?.imageURL
-
-            val dragData = ClipData.newPlainText("image_path", awsItem)
-            val dragShadowBuilder = View.DragShadowBuilder(view)
-
-            // Start the drag operation
-            view.startDragAndDrop(dragData, dragShadowBuilder, null, View.DRAG_FLAG_GLOBAL)
-            true
         }
     }
 
-    private fun populateGrid(list: List<AwsItem>) {
-
-        val grid: GridView = binding.servicesList
-        val adapter = AwsServicesAdapter(list, requireContext())
-
-        grid.adapter = adapter
-
-        bindButtons(grid, adapter)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun goToSingle(item: AwsItem) {
+        awsViewModel.selectedItem = item
+        findNavController().navigate(R.id.action_ArchiveFragment_to_SingleFragment)
     }
 }
