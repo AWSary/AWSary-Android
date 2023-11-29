@@ -5,10 +5,10 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class AwsItem(
-    @SerialName("shortDesctiption") val shortDescription: String,
-    val imageURL: String,
-    val longName: String,
-    @SerialName("youtube_id") val youtubeId: String,
-    val id: Int,
-    val name: String
+    @SerialName("shortDescription") val shortDescription: String = "",
+    val imageURL: String = "",
+    val longName: String = "",
+    @SerialName("youtube_id") val youtubeId: String = "",
+    val id: Int = 0,
+    val name: String = ""
 )
