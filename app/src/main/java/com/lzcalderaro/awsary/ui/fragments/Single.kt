@@ -1,27 +1,28 @@
 package com.lzcalderaro.awsary.ui.fragments
 
-import android.content.ClipData
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.bumptech.glide.Glide
-import com.lzcalderaro.awsary.databinding.SingleFragmentBinding
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.lzcalderaro.awsary.ui.components.IconHeader
+import com.lzcalderaro.awsary.ui.screen.ScaffoldScreen
 import com.lzcalderaro.awsary.viewModels.AwsServicesViewModel
-import io.noties.markwon.Markwon
+import dev.jeziellago.compose.markdowntext.MarkdownText
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
 class Single : Fragment() {
-
-    private var _binding: SingleFragmentBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
 
     private val awsViewModel by activityViewModel<AwsServicesViewModel>()
 
@@ -30,41 +31,44 @@ class Single : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = SingleFragmentBinding.inflate(inflater, container, false)
-        return binding.root
-
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        loadView()
-
-/*        binding.buttonSecond.setOnClickListener {
-            findNavController().navigate(R.id.action_SingleFragment_to_ArchiveFragment)
-        }*/
-    }
-
-    private fun loadView() {
-        Glide.with(requireContext()).load(awsViewModel.selectedItem?.imageURL).into(binding.headerImage)
-        binding.headerTitle.text = awsViewModel.selectedItem?.longName
-
-        binding.imageCard.setOnLongClickListener {
-
-            val dragData = ClipData.newPlainText("image_path", awsViewModel.selectedItem?.imageURL)
-            val dragShadowBuilder = View.DragShadowBuilder(it)
-
-            // Start the drag operation
-            it.startDragAndDrop(dragData, dragShadowBuilder, null, View.DRAG_FLAG_GLOBAL)
-            true
+        return ComposeView(requireActivity()).apply {
+            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+            setContent {
+                ScaffoldScreen {
+                    SingleScreen()
+                }
+            }
         }
 
-        val markdown = Markwon.create(requireContext())
-        markdown.setMarkdown(binding.contentText, awsViewModel.selectedItem?.shortDescription.toString())
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    @Composable
+    fun SingleScreen() {
+
+        if (awsViewModel.selectedItem == null) {
+            return
+        }
+
+        Surface(
+            modifier = Modifier.padding(15.dp)
+        ) {
+            Column {
+                IconHeader(awsViewModel.selectedItem!!)
+                Content()
+            }
+        }
+    }
+
+    @Composable
+    fun Content() {
+        awsViewModel.selectedItem?.let {
+            Surface {
+                MarkdownText(
+                    markdown = it.shortDescription,
+                    fontSize = 16.sp,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+            }
+        }
     }
 }

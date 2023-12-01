@@ -8,10 +8,11 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.compose.setContent
 import com.lzcalderaro.awsary.R
 import com.lzcalderaro.awsary.databinding.ActivityMainBinding
-import com.lzcalderaro.awsary.viewModels.AwsServicesViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import com.lzcalderaro.awsary.ui.screen.ScaffoldScreen
+import com.lzcalderaro.awsary.ui.screen.SettingsScreen
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,6 +30,12 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
+
+        setContent {
+            ScaffoldScreen {
+                SettingsScreen()
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
