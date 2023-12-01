@@ -1,5 +1,6 @@
 package com.lzcalderaro.awsary.ui.fragments
 
+import android.content.ClipData
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -87,7 +88,7 @@ class Archive : Fragment() {
         val listState = rememberLazyGridState()
 
         LazyVerticalGrid(
-            columns = GridCells.Adaptive(100.dp),
+            columns = GridCells.Adaptive(80.dp),
             state = listState
         ) {
             items(awsList.size) { index ->

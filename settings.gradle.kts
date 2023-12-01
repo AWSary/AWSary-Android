@@ -4,10 +4,10 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
         maven {
-            url "https://jitpack.io"
+            url = uri("https://jitpack.io")
 
         }
-        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+        maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots/") }
     }
 }
 dependencyResolutionManagement {
@@ -16,11 +16,11 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven {
-            url "https://jitpack.io"
+            url = uri("https://jitpack.io")
         }
-        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+        maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots/") }
     }
 }
 
 rootProject.name = "awsary"
-include ':app'
+include(":app")
