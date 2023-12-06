@@ -9,73 +9,67 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Search
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.text.TextRange
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.lzcalderaro.awsary.viewModels.HomeScreenViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchBar(
+fun SearchScreen(awsViewModel: HomeScreenViewModel = viewModel()) {
+    var fieldValue: String by rememberSaveable { mutableStateOf("") }
+
+    awsViewModel.onValueChange(fieldValue)
+    SearchContent(searchDisplay = fieldValue, onSearchDisplayChanged = {
+        fieldValue = it
+        awsViewModel.onValueChange(it)
+    } )
+}
+
+@Composable
+fun SearchContent(
     searchDisplay: String,
     onSearchDisplayChanged: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val focusManager = LocalFocusManager.current
-
-    var textFieldValue by remember {
-        mutableStateOf(TextFieldValue(searchDisplay, TextRange(searchDisplay.length)))
-    }
 
     Row(
         modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.Start,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        TextField(
-            value = textFieldValue,
-            colors = TextFieldDefaults.textFieldColors(
-                disabledTextColor = Color.Transparent,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                disabledIndicatorColor = Color.Transparent
-            ),
-            onValueChange = {
-                textFieldValue = it
-                onSearchDisplayChanged(it.text)
-            },
-            trailingIcon = {
-                SearchIcon()
-            },
-            shape = RoundedCornerShape(percent = 20),
+
+        val keyboardController = LocalSoftwareKeyboardController.current
+        val focusManager = LocalFocusManager.current
+
+        OutlinedTextField(
+            value = searchDisplay,
+            onValueChange = onSearchDisplayChanged,
+            label = { Text(text = "Search") },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(10.dp),
-            label = {
-                Text(text = "Search")
-            },
-            keyboardOptions = KeyboardOptions(
-                imeAction = ImeAction.Done
-            ),
-            keyboardActions = KeyboardActions(
-                onDone = {
-                    focusManager.clearFocus()
-                }
-            )
+            shape = RoundedCornerShape(percent = 20),
+            leadingIcon = { SearchIcon() },
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
+            keyboardActions = KeyboardActions(onSearch = {
+                onSearchDisplayChanged(searchDisplay)
+                // Hide the keyboard after submitting the search
+                keyboardController?.hide()
+                //or hide keyboard
+                focusManager.clearFocus()
+            })
         )
     }
 }
