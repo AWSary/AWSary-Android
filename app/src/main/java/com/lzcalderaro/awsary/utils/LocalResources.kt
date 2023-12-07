@@ -18,8 +18,8 @@ class LocalResources(private val context:Context) {
         val inputStream: InputStream = context.resources.openRawResource(R.raw.services)
         val writer: Writer = StringWriter()
         val buffer = CharArray(1024)
-        return inputStream.use { inputStream ->
-            val reader: Reader = BufferedReader(InputStreamReader(inputStream, "UTF-8"))
+        return inputStream.use { iS ->
+            val reader: Reader = BufferedReader(InputStreamReader(iS, "UTF-8"))
             var n: Int
             while (reader.read(buffer).also { n = it } != -1) {
                 writer.write(buffer, 0, n)

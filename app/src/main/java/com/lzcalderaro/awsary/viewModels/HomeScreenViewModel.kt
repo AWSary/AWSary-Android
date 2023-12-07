@@ -49,10 +49,11 @@ class HomeScreenViewModel(private val awsServicesRepository: AwsServicesReposito
         }
     }
 
-    private fun loadData(list: List<AwsItem>?) {
-        viewModelScope.launch {
-            _filteredList.emit(list)
-            _completeList.postValue(list)
-        }
+    private suspend fun loadData(list: List<AwsItem>?) {
+
+        val sortedAppsList = list?.sortedBy { it.name }
+
+        _filteredList.emit(sortedAppsList)
+        _completeList.postValue(sortedAppsList)
     }
 }

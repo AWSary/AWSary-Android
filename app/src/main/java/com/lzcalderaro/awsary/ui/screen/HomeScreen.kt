@@ -15,7 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.lzcalderaro.awsary.ui.components.AwsIcon
+import com.lzcalderaro.awsary.ui.components.IconList
 import com.lzcalderaro.awsary.ui.components.SearchScreen
 import com.lzcalderaro.awsary.ui.navigation.Screens
 import com.lzcalderaro.awsary.viewModels.HomeScreenViewModel
@@ -69,14 +69,14 @@ private fun itemGrid(awsList: List<AwsItem>, onClick: (item:AwsItem) -> Unit) {
     val listState = rememberLazyGridState()
 
     LazyVerticalGrid(
-        columns = GridCells.Adaptive(80.dp),
-        state = listState
+        columns = GridCells.Adaptive(100.dp),
+        state = listState,
     ) {
         items(awsList.size) { index ->
             Surface(
                 onClick = { onClick(awsList[index]) }
             ) {
-                AwsIcon(awsList[index]).IconList()
+                IconList(awsList[index])
             }
         }
     }

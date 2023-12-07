@@ -1,6 +1,8 @@
 package com.lzcalderaro.awsary.ui.screen
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -11,11 +13,12 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.lzcalderaro.awsary.ui.components.AwsIcon
+import com.lzcalderaro.awsary.ui.components.IconHeader
 import com.lzcalderaro.awsary.viewModels.DetailScreenViewModel
 import com.lzcalderaro.awsary.webservice.dto.AwsItem
 import dev.jeziellago.compose.markdowntext.MarkdownText
@@ -46,10 +49,10 @@ fun DetailContent(key: String) {
     Surface(
         modifier = Modifier.padding(15.dp)
     ) {
-        Column {
+        Column{
             item.let {
                 if (it != null) {
-                    AwsIcon(it).IconHeader()
+                    IconHeader(it)
                     Content(it)
                 }
             }
