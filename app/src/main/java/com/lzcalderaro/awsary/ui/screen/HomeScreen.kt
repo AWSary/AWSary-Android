@@ -1,5 +1,6 @@
 package com.lzcalderaro.awsary.ui.screen
 
+import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -44,7 +45,7 @@ fun HomeContent(navController: NavController) {
                 awsList.let {
                     if (it != null) {
                         itemGrid(it) {
-                            val position = viewModel.completeList.value?.indexOf(it)
+                            val position = viewModel.originalList.value?.indexOf(it)
                             navController.navigate("${Screens.DetailScreen.name}/${position}")
                         }
                     }

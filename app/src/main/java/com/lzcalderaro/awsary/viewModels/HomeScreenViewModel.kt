@@ -15,8 +15,9 @@ class HomeScreenViewModel(private val awsServicesRepository: AwsServicesReposito
 
     private val _filteredList = MutableStateFlow<List<AwsItem>?>(emptyList())
     private val _completeList = MutableLiveData<List<AwsItem>?>()
+    private val _originalList = MutableLiveData<List<AwsItem>?>()
 
-    val completeList: LiveData<List<AwsItem>?> = _completeList
+    val originalList: LiveData<List<AwsItem>?> = _originalList
     val filteredList: Flow<List<AwsItem>?> = _filteredList
 
     fun onValueChange(value: String) {
@@ -50,6 +51,8 @@ class HomeScreenViewModel(private val awsServicesRepository: AwsServicesReposito
     }
 
     private suspend fun loadData(list: List<AwsItem>?) {
+
+        _originalList.postValue(list)
 
         val sortedAppsList = list?.sortedBy { it.name }
 
