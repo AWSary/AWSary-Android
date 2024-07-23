@@ -22,9 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.android.lzcalderaro.core.presentation.designsystem.AppTheme
-import com.android.lzcalderaro.core.presentation.designsystem.ArrowLeftIcon
 import com.android.lzcalderaro.core.presentation.designsystem.R
-import com.android.lzcalderaro.core.presentation.designsystem.md_theme_default_color
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
