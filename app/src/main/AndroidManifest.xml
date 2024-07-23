@@ -17,7 +17,7 @@
         android:theme="@style/Theme.AWSary"
         tools:targetApi="31">
         <activity
-            android:name=".ui.activities.MainActivity"
+            android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.AWSary">
             <intent-filter>
@@ -25,6 +25,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            android:exported="false"
+            tools:node="merge">
+            <meta-data
+                android:name="androidx.work.WorkManagerInitializer"
+                android:value="androidx.startup"
+                tools:node="remove" />
+        </provider>
     </application>
 
 </manifest>

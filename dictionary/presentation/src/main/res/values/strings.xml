@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="conextion_error">Connextion Error!</string>
+    <string name="about_me">Hello, I am Luiz and I\'m an Android Developer.\\nThe first version of this app was published for iOS by Tiago Rodrigues ([Github](https://github.com/tigpt)), and I decided to create a version for Android as well.\\nNew AWS services are released all the time, and sometimes you just want a quick dictionary definition.\\nThis app is a great AWS Cloud Consultant companion tool and I hope it\'s useful for you.\\nIf you want to help, you are more than welcome to [buy me a coffee](https://www.buymeacoffee.com/lzcalderaro).\\nFollow me on: \\n[Github](https://github.com/lzcalderaro) and \\n[Twitter](https://twitter.com/luizcalderaro)</string>
+    <string name="show_name_on_service_logo">Show name on service logo</string>
+    <string name="email">Email</string>
+    <string name="why_awsary">Why AWSary</string>
+    <string name="configure_service_logo">Configure Service Logo</string>
+    <string name="feedback">Feedback</string>
+    <string name="send_feedback">Send Feedback</string>
+    <string name="feedback_email_are_lovely_to_read">Feedback emails are lovely to read!</string>
+</resources>
