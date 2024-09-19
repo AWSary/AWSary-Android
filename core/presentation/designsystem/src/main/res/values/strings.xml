@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AWSary</string>
+    <string name="go_back">Go back!</string>
+    <string name="error_couldnt_load_image">Couldn\'t load image!</string>
+</resources>
