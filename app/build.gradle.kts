@@ -10,7 +10,7 @@ val localKeyPassword: String by project
 
 android {
     namespace = "com.lzcalderaro.awsary"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -74,7 +74,6 @@ dependencies {
     implementation(libs.timber)
 
     //api(libs.core)
-
     implementation(projects.core.presentation.designsystem)
     implementation(projects.core.presentation.ui)
     implementation(projects.core.domain)
