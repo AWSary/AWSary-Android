@@ -11,4 +11,5 @@ dependencies {
     implementation(projects.core.domain)
     implementation(projects.dictionary.domain)
     implementation(projects.core.presentation.designsystem)
+    implementation(libs.androidx.material.icons.extended)
 }

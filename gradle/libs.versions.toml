@@ -1,37 +1,37 @@
 [versions]
-agp = "8.12.0"
+agp = "8.12.3"
 coilCompose = "2.7.0"
 composeMarkdown = "0.3.0"
 converterMoshi = "3.0.0"
-googleServices = "4.4.3"
-koin = "4.1.0"
-kotlin = "2.2.0"
-coreKtx = "1.16.0"
+googleServices = "4.4.4"
+koin = "4.1.1"
+kotlin = "2.3.10"
+coreKtx = "1.18.0"
 junit = "4.13.2"
 junitVersion = "1.3.0"
 espressoCore = "3.7.0"
-lifecycleRuntimeKtx = "2.9.2"
-activityCompose = "1.10.1"
-composeBom = "2025.07.00"
+lifecycleRuntimeKtx = "2.10.0"
+activityCompose = "1.13.0"
+composeBom = "2026.03.00"
 retrofit = "3.0.0"
-navigationCompose = "2.9.3"
-jetbrainsKotlinJvm = "2.2.0"
+navigationCompose = "2.9.7"
+jetbrainsKotlinJvm = "2.3.10"
 securityCryptoKtx = "1.1.0"
 
 playCore = "1.10.3"
 
 coroutines = "1.10.2"
 
-androidTools = "31.12.0"
+androidTools = "32.1.0"
 ksp = "2.0.0-1.0.22"
 
-ktor = "3.2.3"
-ktorClientLogging = "3.2.3"
-ktorServerCallLogging = "3.2.3"
+ktor = "3.4.1"
+ktorClientLogging = "3.4.1"
+ktorServerCallLogging = "3.4.1"
 
 timber = "5.0.1"
 appcompat = "1.7.1"
-material = "1.12.0"
+material = "1.13.0"
 
 desugar_jdk_libs = "2.1.5"
 
@@ -44,9 +44,9 @@ projectMinSdkVersion = "26"
 projectTargetSdkVersion = "36"
 projectCompileSdkVersion = "36"
 projectVersionCode = "6"
-kotlinx-serialization = "1.9.0"
+kotlinx-serialization = "1.10.0"
 
-googleService = "4.4.3"
+googleService = "4.4.4"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }

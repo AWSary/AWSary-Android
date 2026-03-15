@@ -52,6 +52,9 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.navigation.compose)
 
+    // Material
+    implementation(libs.material)
+
     // Test Implementation
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -13,6 +13,7 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -35,21 +36,22 @@ fun TopBar(
 ) {
     TopAppBar(
         title = {
-            Surface {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    startContent?.invoke()
-                    Text(
-                        text = stringResource(id = R.string.app_name),
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 25.sp
-                    )
-                    endContent?.invoke()
-                }
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                startContent?.invoke()
+                Text(
+                    text = stringResource(id = R.string.app_name),
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 25.sp
+                )
+                endContent?.invoke()
             }
         },
         scrollBehavior = scrollBehavior,
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = Color.Transparent
+        ),
         navigationIcon = {
             if(showBackButton) {
                 IconButton(onClick = onBackClick) {
