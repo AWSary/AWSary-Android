@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AWSary</string>
+    <string name="app_name">AWSary Debug</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="next">Next</string>

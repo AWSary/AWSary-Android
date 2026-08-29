@@ -3,7 +3,7 @@ agp = "8.12.3"
 coilCompose = "2.7.0"
 composeMarkdown = "0.3.0"
 converterMoshi = "3.0.0"
-googleServices = "4.4.4"
+googleServices = "4.5.0"
 koin = "4.1.1"
 kotlin = "2.3.10"
 coreKtx = "1.18.0"
@@ -39,14 +39,14 @@ materialIconsExtended = "1.7.8"
 
 # Project versions
 projectApplicationId = "com.lzcalderaro.awsary"
-projectVersionName = "1.4"
+projectVersionName = "1.6"
 projectMinSdkVersion = "26"
-projectTargetSdkVersion = "36"
-projectCompileSdkVersion = "36"
-projectVersionCode = "6"
+projectTargetSdkVersion = "37"
+projectCompileSdkVersion = "37"
+projectVersionCode = "7"
 kotlinx-serialization = "1.10.0"
 
-googleService = "4.4.4"
+googleService = "4.5.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }

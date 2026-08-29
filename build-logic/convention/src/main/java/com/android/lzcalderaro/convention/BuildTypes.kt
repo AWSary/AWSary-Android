@@ -23,9 +23,13 @@ internal fun Project.configureBuildTypes(
                     buildTypes {
                         debug {
                             configureDebugBuildType()
+                            applicationIdSuffix = ".debug"
+                            versionNameSuffix = "+demo"
+                            isDebuggable = true
                         }
                         release {
                             configureReleaseBuildType(commonExtension)
+                            isMinifyEnabled = true
                         }
                     }
                 }
@@ -55,7 +59,6 @@ private fun BuildType.configureReleaseBuildType(
 ) {
     buildConfigField("String", "BASE_URL", "\"https://awsary.s3.us-east-1.amazonaws.com\"")
 
-    isMinifyEnabled = false
     proguardFiles(
         commonExtension.getDefaultProguardFile("proguard-android-optimize.txt"),
         "proguard-rules.pro"

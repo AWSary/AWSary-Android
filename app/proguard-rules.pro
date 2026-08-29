@@ -29,3 +29,17 @@
 #-keepclassmembers class com.yourcompany.models.** {
 #  *;
 #}
+
+-dontwarn com.android.lzcalderaro.core.data.di.CoreDataModuleKt
+-dontwarn com.android.lzcalderaro.core.presentation.designsystem.ThemeKt
+-dontwarn com.android.lzcalderaro.dictionary.data.di.DictionaryKoinModuleKt
+-dontwarn com.android.lzcalderaro.dictionary.presentation.detail.DetailScreenKt
+-dontwarn com.android.lzcalderaro.dictionary.presentation.detail.DetailViewModel
+-dontwarn com.android.lzcalderaro.dictionary.presentation.di.DictionaryViewModelModuleKt
+-dontwarn com.android.lzcalderaro.dictionary.presentation.list.ListScreenKt
+-dontwarn com.android.lzcalderaro.dictionary.presentation.list.ListViewModel
+
+-keep class com.android.lzcalderaro.core.data.di.** { *; }
+-keep class com.android.lzcalderaro.dictionary.data.di.** { *; }
+-keep class com.android.lzcalderaro.dictionary.presentation.di.** { *; }
+-keep class com.android.lzcalderaro.dictionary.presentation.** { *; }
