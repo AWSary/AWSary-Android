@@ -39,11 +39,11 @@ materialIconsExtended = "1.7.8"
 
 # Project versions
 projectApplicationId = "com.lzcalderaro.awsary"
-projectVersionName = "1.6"
+projectVersionName = "1.7"
 projectMinSdkVersion = "26"
 projectTargetSdkVersion = "37"
 projectCompileSdkVersion = "37"
-projectVersionCode = "7"
+projectVersionCode = "8"
 kotlinx-serialization = "1.10.0"
 
 googleService = "4.5.0"

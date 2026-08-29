@@ -30,6 +30,7 @@ internal fun Project.configureBuildTypes(
                         release {
                             configureReleaseBuildType(commonExtension)
                             isMinifyEnabled = true
+                            signingConfig = signingConfigs.getByName("release")
                         }
                     }
                 }
